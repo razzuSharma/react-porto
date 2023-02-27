@@ -1,12 +1,22 @@
 import "./index.css";
 import React from "react";
+import Projects from "./Projects";
+import Contact from "./ContactPage";
 import {
   BsFillMoonStarsFill,
   BsGithub,
   BsLinkedin,
   BsFacebook,
 } from "react-icons/bs";
-import { FaReact, FaVuejs, FaGithub } from "react-icons/fa";
+import {
+  FaReact,
+  FaVuejs,
+  FaGithub,
+  FaHtml5,
+  FaCss3,
+  FaLinux,
+  FaJs,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 import {
   Animator,
@@ -18,15 +28,17 @@ import {
   ZoomIn,
 } from "react-scroll-motion";
 
-import { useState } from "react";
-
 function App() {
-  // const regularZoom = batch(StickyIn(50,20),FadeIn(), ZoomIn())
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [isOpen3, setIsOpen3] = useState(false);
-
   const ZoomInScrollOut = batch(StickyIn(50, 10), FadeIn(), ZoomIn());
+  const stylesICons = {
+    FaReact,
+    FaVuejs,
+    FaGithub,
+    FaHtml5,
+    FaCss3,
+    FaLinux,
+    FaJs,
+  };
   return (
     <div className="App">
       <ScrollContainer>
@@ -67,15 +79,14 @@ function App() {
             >
               <span className=" text-teal-500">WEB</span> DEVELOPER
             </motion.h3>
-            <p className="font-serif pt-4 leading-3f">
-              As a front-end developer, I am passionate about creating visually
-              appealing and user-friendly websites. I have experience in HTML,
-              CSS, and JavaScript and I enjoy using these skills to bring
-              designs to life. In my portfolio, you will find a selection of my
-              recent projects that highlight my abilities in front-end
-              development. My work includes responsive design, cross-browser
-              compatibility, and a strong focus on user experience.
-            </p>
+            <div className="flex justify-center">
+              <p className="font-serif pt-4 text-center leading-3f w-2/4">
+                As a front-end developer, I am passionate about creating
+                visually appealing and user-friendly websites. I have experience
+                in HTML, CSS, and JavaScript and I enjoy using these skills to
+                bring designs to life.
+              </p>
+            </div>
           </div>
           <div className="text-center text-3xl font-bold"></div>
           <div className="flex text-xl tracking-wide justify-center gap-6 pt-5">
@@ -84,68 +95,124 @@ function App() {
             <BsFacebook />
           </div>
         </section>
-        <section className="h-screen w-screen bg-gradient-to-t  from-gray-100 to to-teal-100 ">
+        <section className="h-screen w-screen  bg-orange-50 ">
           <ScrollPage>
-            <motion.div className="text-center mt-40 justify-center  flex flex-column gap-4">
+            <motion.div className="text-center mt-40 justify-center flex flex-column gap-4">
               <motion.div
-                className="block max-w-sm p-6 bg-white-50 border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50"
-                layout
-                onClick={() => setIsOpen(!isOpen)}
+                className="block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
                 transition={{ layout: { duration: 0.6, type: "spring" } }}
               >
                 <h1>
                   <FaReact className="" />
                 </h1>
-                {isOpen && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ dration: 1 }}
-                    className="text-center"
-                  >
-                    REACT
-                  </motion.p>
-                )}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></motion.p>
               </motion.div>
               <div
-                className=" block max-w-sm p-6 bg-white-50 border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700   w-50"
-                layout
+                className=" block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
                 onClick={() => setIsOpen2(!isOpen2)}
                 transition={{ layout: { duration: 0.6, type: "spring" } }}
               >
                 <h1>
                   <FaVuejs className="justify-center text-center" />
                 </h1>
-                {isOpen2 && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ dration: 1 }}
-                    className="text-center"
-                  >
-                    VUE JS
-                  </motion.p>
-                )}
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></motion.p>
               </div>
               <div
-                className=" block max-w-sm p-6 bg-white-50 border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700   w-50"
-                layout
-                onClick={() => setIsOpen3(!isOpen3)}
+                className=" block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
                 transition={{ layout: { duration: 0.6, type: "spring" } }}
               >
                 <h1>
                   <FaGithub />
                 </h1>
-                {isOpen3 && <p   initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ dration: 1 }}
-                    className="text-center" >GITHUB</p>}
+
+                <p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></p>
+              </div>
+              <div
+                className=" block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
+                transition={{ layout: { duration: 0.6, type: "spring" } }}
+              >
+                <h1>
+                  <FaHtml5 />
+                </h1>
+
+                <p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></p>
+              </div>
+              <div
+                className=" block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
+                transition={{ layout: { duration: 0.6, type: "spring" } }}
+              >
+                <h1>
+                  <FaCss3 />
+                </h1>
+                <p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></p>
+              </div>
+              <div
+                className=" block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
+                transition={{ layout: { duration: 0.6, type: "spring" } }}
+              >
+                <h1>
+                  <FaLinux />
+                </h1>
+                <p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></p>
+              </div>
+              <div
+                className=" block max-w-sm p-6 bg-white-50 border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-50 sm:w-auto"
+                transition={{ layout: { duration: 0.6, type: "spring" } }}
+              >
+                <h1>
+                  <FaJs />
+                </h1>
+                <p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ dration: 1 }}
+                  className="text-center"
+                ></p>
               </div>
             </motion.div>
             <h1>
-              <Animator animation={ZoomInScrollOut}>My Skills...</Animator>
+              <Animator animation={ZoomInScrollOut} className="md:text-center">
+                <div className="text-center md:text-left">
+                  <h2 className="text-3xl mb-4">My Skills...</h2>
+                </div>
+              </Animator>
             </h1>
+            <Projects  />
           </ScrollPage>
+        </section>
+        <section className="h-screen w-screen  bg-orange-50 ">
+          <Contact/>
         </section>
       </ScrollContainer>
     </div>

@@ -1,39 +1,36 @@
-import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
+import { toast } from "react-toastify";
 
 const ContactPage = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Send form data to server
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert("Form submitted!");
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
-    }, 2000);
-  };
-
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [state, handleSubmit] = useForm("xwkjbqee");
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { error, response } = await handleSubmit(event);
+      if (error) {
+        console.log("Form submission error:", error);
+        toast.error("Form submission failed. Please try again.");
+      } else if (response && response.ok) {
+        console.log("Email Sent");
+        toast.success("Form submitted successfully!");
+      } else {
+        console.log("Unknown form submission response:", response);
+        toast.error("Form submission failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Form submission error:", err);
+      toast.error(
+        "An error occurred during form submission. Please try again later."
+      );
+    }
   };
 
   return (
-    <div className="min-h-screenflex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screenflex items-center flex-col justify-center py-12 md:px-6 lg:px-8 ">
+      <div className="md:mx-auto md:w-full md:max-w-md">
         <motion.h2
-          className="text-center text-3xl font-extrabold text-gray-900"
+          className="text-center text-3xl font-extrabold dark:text-dark text-gray-900 mt-10"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -42,13 +39,18 @@ const ContactPage = () => {
         </motion.h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="mt-8 md:mx-auto md:w-full md:max-w-md">
+        <div className="bg-white py-8 px-4 shadow md:rounded-lg md:px-10">
+          <form
+            method="POST"
+            action="https://formspree.io/f/xwkjbqee"
+            onSubmit={handleFormSubmit}
+            className="space-y-6"
+          >
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-md font-medium text-gray-700"
               >
                 Name
               </label>
@@ -57,10 +59,13 @@ const ContactPage = () => {
                   type="text"
                   name="name"
                   id="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <ValidationError
+                  prefix="name"
+                  field="name"
+                  errors={state.errors}
                 />
               </div>
             </div>
@@ -77,10 +82,13 @@ const ContactPage = () => {
                   type="email"
                   name="email"
                   id="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
                 />
               </div>
             </div>
@@ -96,16 +104,19 @@ const ContactPage = () => {
                   type="text"
                   name="message"
                   id="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
                 />
               </div>
             </div>
             <button
-              type="button"
-              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              type="submit"
+              className="text-white bg-teal-500 hover:hover:bg-teal-700 hover:translate-x-0.5 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
               Submit
             </button>
